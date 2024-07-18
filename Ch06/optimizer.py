@@ -4,11 +4,11 @@ import numpy as np
 
 class SGD:
     def __init__(self, lr=0.01):
-        self.lr = lr #학습률 기본 0.01로 초기화
+        self.lr = lr
         
     def update(self, params, grads):
         for key in params.keys():
-            params[key] -= self.lr * grads[key] # W <- W-eta*grad
+            params[key] -= self.lr * grads[key] 
 
 
 class Momentum:
@@ -21,11 +21,11 @@ class Momentum:
         if self.v is None:
             self.v = {}
             for key, val in params.items():                                
-                self.v[key] = np.zeros_like(val) #각 항목의 배열의 같은 크기의 0 배열 생성 
+                self.v[key] = np.zeros_like(val)
                 
         for key in params.keys():
-            self.v[key] = self.momentum*self.v[key] - self.lr*grads[key] # V <- momentum*V - eta*grad 
-            params[key] += self.v[key] # W<- W+V  모멘텀 수식과 같음
+            self.v[key] = self.momentum*self.v[key] - self.lr*grads[key] 
+            params[key] += self.v[key]
 
 
 

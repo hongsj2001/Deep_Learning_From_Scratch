@@ -9,20 +9,20 @@ from common.functions import sigmoid, softmax
 from PIL import Image
 
 
-def img_show(img):
+def img_show(img): #이미지 출력
     pil_img = Image.fromarray(np.uint8(img))
     pil_img.show()
 
-def get_data():
+def get_data(): #MNIST 테스트 데이터 가져옴
     (x_train, t_train) , (x_test,t_test) = load_mnist(flatten = True, normalize = False)
     return x_test, t_test
 
-def init_network():
-    with open('sample_weight.pkl', 'rb') as f: #피클 파일을 읽어옴
+def init_network(): #피클 파일로부터 가중치 데이터를 가져옴
+    with open('sample_weight.pkl', 'rb') as f:
         network = pickle.load(f)
     return network
 
-def predict(network, x):
+def predict(network, x): #입력 데이터에 대해 신호 전달 구현
     W1,W2,W3 = network['W1'], network['W2'], network['W3']
     b1,b2,b3 = network['b1'], network['b2'], network['b3']
 
@@ -38,12 +38,13 @@ def predict(network, x):
 x,t =get_data()
 network = init_network()
 
-accuracy_cnt = 0
+accuracy_cnt = 0 #예측에 성공한 횟수 
 
-for i in range(len(x)):
-    y = predict(network, x[i]) #forward
-    p = np.argmax(y) #예측값을 찾아냄
-    if(p == t[i]): #예측 성공시 accuracy_cnt를 1올림
+for i in range(len(x)): #데이터 갯수 만큼 실행 (테스트 이미지셋은 10000개 이므로 10000회 실행)
+    y = predict(network, x[i]) #신호 전달
+    p = np.argmax(y) #소프트맥스 함수의 출력이므로 가장 높은 확률을 가진 인덱스 출력
+    if(p == t[i]): #예측 결과와 일치하면 카운트 증가
         accuracy_cnt += 1
 
-print("Accuracy : " + str(float((accuracy_cnt / len(x))))) #정확도 계산
+
+print("Accuracy : " + str(float((accuracy_cnt / len(x))))) #(맞춘 횟수 / 전체 실행 횟수) 로 정확도 출력

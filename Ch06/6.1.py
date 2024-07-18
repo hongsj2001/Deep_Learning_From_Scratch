@@ -9,22 +9,21 @@ from common.multi_layer_net import MultiLayerNet
 from optimizer import *
 
 
-(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True) #MNIST 데이터 가져옴
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
 
 train_size = x_train.shape[0]
 batch_size = 128
 max_iterations = 2000
 
 
-optimizers = {} #딕셔너리로 Optimizer 저장
+optimizers = {}
 optimizers['SGD'] = SGD()
 optimizers['Momentum'] = Momentum()
 optimizers['AdaGrad'] = AdaGrad()
 optimizers['Adam'] = Adam()
 
-networks = {} #각 최적화 기법들을 위한 네트워크 딕셔너리 선언
-train_loss = {} #각 최적화 기법들의 손실값 저장을 위한 딕셔너리 선언
-
+networks = {}
+train_loss = {}
 for key in optimizers.keys():
     networks[key] = MultiLayerNet(
         input_size=784, hidden_size_list=[100, 100, 100, 100],
@@ -34,7 +33,7 @@ for key in optimizers.keys():
 
 #훈련 시작
 for i in range(max_iterations):
-    batch_mask = np.random.choice(train_size, batch_size) #배치 사이즈 만큼 데이터 랜덤 선택
+    batch_mask = np.random.choice(train_size, batch_size)
     x_batch = x_train[batch_mask]
     t_batch = t_train[batch_mask]
     
