@@ -1,3 +1,5 @@
+#가중치의 초깃값
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -13,9 +15,9 @@ def ReLU(x):
 def tanh(x):
     return np.tanh(x)
     
-input_data = np.random.randn(1000, 100)  
+input_data = np.random.randn(1000, 100)  #1000X100 모양의 랜덤 데이터 생성
 node_num = 100 
-hidden_layer_size = 5  
+hidden_layer_size = 5  #은닉층 5개
 activations = {}  # 활성화 결과를 저장
 
 x = input_data

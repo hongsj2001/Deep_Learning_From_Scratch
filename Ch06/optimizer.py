@@ -2,6 +2,8 @@
 
 import numpy as np
 
+
+#SGD 구현
 class SGD:
     def __init__(self, lr=0.01):
         self.lr = lr
@@ -10,7 +12,7 @@ class SGD:
         for key in params.keys():
             params[key] -= self.lr * grads[key] 
 
-
+#Momentum 구현
 class Momentum:
     def __init__(self, lr=0.01, momentum=0.9):
         self.lr = lr
@@ -27,9 +29,7 @@ class Momentum:
             self.v[key] = self.momentum*self.v[key] - self.lr*grads[key] 
             params[key] += self.v[key]
 
-
-
-
+#AdaGrad 구현
 class AdaGrad:
     def __init__(self, lr=0.01):
         self.lr = lr
@@ -45,7 +45,7 @@ class AdaGrad:
             self.h[key] += grads[key] * grads[key]
             params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key]) + 1e-7)
 
-
+#RMSprop 구현
 class RMSprop:
     def __init__(self, lr=0.01, decay_rate = 0.99):
         self.lr = lr
@@ -63,7 +63,7 @@ class RMSprop:
             self.h[key] += (1 - self.decay_rate) * grads[key] * grads[key]
             params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key]) + 1e-7)
 
-
+#Adam 구현
 class Adam:
     def __init__(self, lr=0.001, beta1=0.9, beta2=0.999):
         self.lr = lr

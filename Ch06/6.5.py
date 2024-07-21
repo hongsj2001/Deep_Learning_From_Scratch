@@ -1,3 +1,5 @@
+#6.5 적절한 하이퍼파라미터 값 찾기
+
 import sys, os
 sys.path.append(os.pardir)
 import numpy as np

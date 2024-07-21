@@ -1,3 +1,5 @@
+#6.4.2 가중치 감소
+
 import os
 import sys
 sys.path.append(os.pardir)
