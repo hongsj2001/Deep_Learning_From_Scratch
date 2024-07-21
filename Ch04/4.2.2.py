@@ -14,5 +14,5 @@ y1 = [0.1,0.05,0.6,0.0,0.05,0.1,0.0,0.1,0.0,0.0]
 print("ex1의 CEE: "+ str(cross_entropy_error(np.array(y1),np.array(t))))
 
 # ex1) 정답이 7일 확률이 가장 높다고 추정
-y28 = [0.1,0.05,0.1,0.0,0.05,0.1,0.0,0.6,0.0,0.0]
+y2 = [0.1,0.05,0.1,0.0,0.05,0.1,0.0,0.6,0.0,0.0]
 print("ex2의 CEE: "+ str(cross_entropy_error(np.array(y2),np.array(t))))

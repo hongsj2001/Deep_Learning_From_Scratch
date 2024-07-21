@@ -23,16 +23,19 @@ def tangent_line(f, x):
 print(numerical_diff(func_1,5))
 print(numerical_diff(func_1,10))
 
-x = np.arange(0.0,20.0,0.1)
-y = func_1(x)
-plt.xlabel("x")
-plt.ylabel("f(x)")
 
-tf = tangent_line(func_1, 5)
+#그래프 생성
+x = np.arange(0.0,20.0,0.1) #x값 범위 : 0부터 20까지 0.1단위로 끊어서 생성
+y = func_1(x) #y값
+plt.xlabel("x") #x축 이름
+plt.ylabel("f(x)") #y축 이름
+
+tf = tangent_line(func_1, 5) #x=5에서의 접선
 y2 = tf(x)
 
-plt.plot(x, y)
-plt.plot(x, y2)
+plt.plot(x, y,label="f(x)")
+plt.plot(x, y2, label="Tangent Line")
+plt.legend()
 plt.show()
 
 

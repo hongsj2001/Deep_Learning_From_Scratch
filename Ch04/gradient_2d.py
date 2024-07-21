@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pylab as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-
+#배치를 사용하지 않는 경우 편미분
 def _numerical_gradient_no_batch(f, x):
     h = 1e-4 # 0.0001
     grad = np.zeros_like(x) # x와 형상이 같은 배열을 생성
@@ -23,9 +23,9 @@ def _numerical_gradient_no_batch(f, x):
         
     return grad
 
-
+ #편미분 구현
 def numerical_gradient(f, X):
-    if X.ndim == 1:
+    if X.ndim == 1: #
         return _numerical_gradient_no_batch(f, X)
     else:
         grad = np.zeros_like(X)

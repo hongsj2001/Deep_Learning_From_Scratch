@@ -13,11 +13,13 @@ from two_layer_net import TwoLayerNet
 network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
 
 # 하이퍼파라미터
-iters_num = 10000  # 반복 횟수를 적절히 설정한다.
+iters_num = 10000  # 10000회 반복
 train_size = x_train.shape[0]
-batch_size = 100   # 미니배치 크기
-learning_rate = 0.1
+batch_size = 100   # 미니배치 크기 : 100
+learning_rate = 0.1 #학습률
 
+
+#경과를 저장할 리스트들 
 train_loss_list = []
 train_acc_list = []
 test_acc_list = []
@@ -27,7 +29,7 @@ iter_per_epoch = max(train_size / batch_size, 1)
 
 for i in range(iters_num):
     # 미니배치 획득
-    batch_mask = np.random.choice(train_size, batch_size)
+    batch_mask = np.random.choice(train_size, batch_size) #10000개 중 100개 랜덤 선택
     x_batch = x_train[batch_mask]
     t_batch = t_train[batch_mask]
     
@@ -41,14 +43,14 @@ for i in range(iters_num):
     
     # 학습 경과 기록
     loss = network.loss(x_batch, t_batch)
-    train_loss_list.append(loss)
+    train_loss_list.append(loss) #Loss값을 리스트에 추가
     
     # 1에폭당 정확도 계산
     if i % iter_per_epoch == 0:
         train_acc = network.accuracy(x_train, t_train)
         test_acc = network.accuracy(x_test, t_test)
-        train_acc_list.append(train_acc)
-        test_acc_list.append(test_acc)
+        train_acc_list.append(train_acc) #train 데이터에 대한 정확도를 리스트에 추가
+        test_acc_list.append(test_acc) #test 데이터에 대한 정확도를 리스트에 추가
         print("train acc, test acc | " + str(train_acc) + ", " + str(test_acc))
 
 # 그래프 그리기
