@@ -4,14 +4,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+#시그모이드 함수 구현
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
-
+#Relu 함수 구현
 def ReLU(x):
     return np.maximum(0, x)
 
-
+#하이퍼 탄젠트 함수 구현
 def tanh(x):
     return np.tanh(x)
     

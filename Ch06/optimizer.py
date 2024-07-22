@@ -5,16 +5,16 @@ import numpy as np
 
 #SGD 구현
 class SGD:
-    def __init__(self, lr=0.01):
+    def __init__(self, lr=0.01): #학습률 0.01로 초기화
         self.lr = lr
         
-    def update(self, params, grads):
+    def update(self, params, grads): #가중치 업데이트
         for key in params.keys():
             params[key] -= self.lr * grads[key] 
 
 #Momentum 구현
 class Momentum:
-    def __init__(self, lr=0.01, momentum=0.9):
+    def __init__(self, lr=0.01, momentum=0.9): #학습률 0.01, 모멘텀 0.9로 초기화
         self.lr = lr
         self.momentum = momentum
         self.v = None

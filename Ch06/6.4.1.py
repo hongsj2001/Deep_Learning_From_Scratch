@@ -10,18 +10,21 @@ from common.optimizer import SGD
 
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
 
-# 오버피팅 재현
+# 훈련데이터를 줄여서 오버피팅 구현
 x_train = x_train[:300]
 t_train = t_train[:300]
 
 
 weight_decay_lambda = 0.1
 
+
+#입력 뉴런 28X28 = 784, 뉴런 100개를 갖는 5층 hidden layer, 출력 뉴런 10개를 갖는 신경망 생성
 network = MultiLayerNet(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100], output_size=10,
                         weight_decay_lambda=weight_decay_lambda)
-optimizer = SGD(lr=0.01) 
 
-max_epochs = 201
+optimizer = SGD(lr=0.01) #optimizer로 SGD 사용 
+
+max_epochs = 201 #최대 학습 횟수
 train_size = x_train.shape[0]
 batch_size = 100
 
