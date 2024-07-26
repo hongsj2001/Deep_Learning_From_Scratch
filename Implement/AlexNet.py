@@ -14,25 +14,22 @@ class AlexNet(nn.Module):
         super(AlexNet, self).__init__()
         self.layer1 = nn.Sequential(
             nn.Conv2d(3, 96, kernel_size=11, stride=4, padding=0),
-            nn.BatchNorm2d(96),
+            nn.LocalResponseNorm(size=5, alpha=0.0001, beta=0.75, k=2),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size = 3, stride = 2))
         self.layer2 = nn.Sequential(
             nn.Conv2d(96, 256, kernel_size=5, stride=1, padding=2),
-            nn.BatchNorm2d(256),
+            nn.LocalResponseNorm(size=5, alpha=0.0001, beta=0.75, k=2),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size = 3, stride = 2))
         self.layer3 = nn.Sequential(
             nn.Conv2d(256, 384, kernel_size=3, stride=1, padding=1),
-            nn.BatchNorm2d(384),
             nn.ReLU())
         self.layer4 = nn.Sequential(
             nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1),
-            nn.BatchNorm2d(384),
             nn.ReLU())
         self.layer5 = nn.Sequential(
             nn.Conv2d(384, 256, kernel_size=3, stride=1, padding=1),
-            nn.BatchNorm2d(256),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size = 3, stride = 2))
         self.fc = nn.Sequential(

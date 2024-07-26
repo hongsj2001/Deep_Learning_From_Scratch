@@ -9,27 +9,16 @@ from torchvision import transforms
 from torch.utils.data.sampler import SubsetRandomSampler
 import torchvision.models as models
 from common.util import smooth_curve
+from optparse import OptionParser
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-def get_train_valid_loader(data_dir,
-                           batch_size,
-                           augment,
-                           random_seed,
-                           valid_size=0.1,
-                           shuffle=True):
-    normalize = transforms.Normalize(
-        mean=[0.4914, 0.4822, 0.4465],
-        std=[0.2023, 0.1994, 0.2010],
-    )
+def get_train_valid_loader(data_dir, batch_size, augment, random_seed, valid_size=0.1, shuffle=True):
+    normalize = transforms.Normalize(mean=[0.4914, 0.4822, 0.4465],std=[0.2023, 0.1994, 0.2010],)
 
     # define transforms
-    valid_transform = transforms.Compose([
-            transforms.Resize((227,227)),
-            transforms.ToTensor(),
-            normalize,
-    ])
+    valid_transform = transforms.Compose([transforms.Resize((227,227)), transforms.ToTensor(), normalize,])
     if augment:
         train_transform = transforms.Compose([
             transforms.RandomCrop(32, padding=4),
@@ -102,8 +91,20 @@ def get_test_loader(data_dir,
 
     return data_loader
 
+
+
+#옵션 선택 (제작중)
+'''
+parser = OptionParser()
+parser.add_option("-s", "--seed", default=0, help="the random seed", action="store", type="int", dest="seed")
+parser.add_option("-ㅣ", "--load", default=False, help="Load Data", action="store", type="bool", dest="load")
+
+(options, args) = parser.parse_args()
+'''
+
+
 # CIFAR10 dataset 
-train_loader, valid_loader = get_train_valid_loader(data_dir = './data',batch_size = 64,augment = False,random_seed = 1)
+train_loader, valid_loader = get_train_valid_loader(data_dir = './data', batch_size = 64,augment = False,random_seed = 1)
 
 test_loader = get_test_loader(data_dir = './data', batch_size = 64)
 
@@ -119,13 +120,12 @@ train_acc1 = []
 train_acc2 = []
 
 #모델 불러오기
-
 '''
-PATH = 'c:/Users/hong/workspace/deep_learnig_from_scratch/model_weights.pth'
-model = AlexNet(num_classes).to(device)
-model.load_state_dict(torch.load(PATH))
+if(options.load):
+    PATH = 'c:/Users/hong/workspace/deep_learnig_from_scratch/model_weights.pth'
+    model = AlexNet(num_classes).to(device)
+    model.load_state_dict(torch.load(PATH))
 '''
-
 
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
